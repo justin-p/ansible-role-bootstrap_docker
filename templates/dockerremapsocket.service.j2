@@ -1,0 +1,15 @@
+[Unit]
+Description=Creates a docker socket for the dockremap user
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/usr/bin/
+ExecStart=/usr/bin/socat UNIX-LISTEN:/var/run/docker-userns.sock,user=0,group=296608,mode=0660,fork UNIX-CLIENT:/var/run/docker.sock
+Restart=on-failure
+# Other Restart options: or always, on-abort, etc
+
+[Install]
+WantedBy=multi-user.target

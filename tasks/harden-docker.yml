@@ -1,0 +1,67 @@
+---
+- name: Ensure audit daemon is installed.
+  package:
+    name: auditd
+    state: present
+  notify: auditd restart
+
+- name: Enable service auditd and ensure it is not masked.
+  systemd:
+    name: auditd
+    enabled: yes
+    masked: no
+
+- name: Ensure auditing is configured for Docker daemon, files and directories.
+  lineinfile:
+    state: present
+    create: yes
+    dest: "/etc/audit/rules.d/docker.rules"
+    line: "{{ item }}"
+  notify: load audit rules
+  with_items:
+   - "-w /usr/bin/docker -k docker"
+   - "-w /var/lib/docker -k docker"
+   - "-w /etc/docker -k docker"
+   - "-w /lib/systemd/system/docker.service -k docker"
+   - "-w /lib/systemd/system/docker.socket -k docker"
+   - "-w /etc/default/docker -k docker"
+   - "-w /etc/docker/daemon.json -k docker"
+   - "-w /usr/bin/docker-containerd -k docker"
+   - "-w /usr/bin/docker-runc -k docker"
+ 
+- name: Ensure Docker Daemon file is uploaded.
+  template:
+    src: "{{ bsd_docker_deamon_template }}"
+    dest: "/etc/docker/daemon.json"
+  notify: docker restart
+
+- name: Ensure socat is installed
+  package:
+    name: socat
+    state: present
+
+- name: Copy dockerremapsocket service template to host.
+  template:
+    src: "{{ bsd_docker_remap_socket_template }}"
+    dest: /etc/systemd/system/dockerremapsocket.service
+    owner: root
+    group: root
+
+- name: Enable dockerremapsocket.
+  become: yes
+  service:
+    name: dockerremapsocket
+    enabled: yes
+
+- name: Flush handlers.
+  meta: flush_handlers
+
+- name: Ensure docker is running.
+  service:
+    name: docker
+    state: started
+
+- name: Ensure dockerremapsocket is running.
+  service:
+    name: dockerremapsocket
+    state: started

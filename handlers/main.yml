@@ -1,0 +1,21 @@
+---
+# handlers file for bootstrap-docker/
+- name: reboot
+  become: yes
+  reboot:
+
+- name: auditd restart
+  become: yes
+  service:
+    name: auditd
+    state: restarted
+
+- name: load audit rules
+  become: yes
+  command: "/sbin/augenrules --load"
+
+- name: docker restart
+  become: yes
+  service:
+    name: docker
+    state: restarted

@@ -1,0 +1,9 @@
+---
+- name: Ensure docker is installed.
+  include_role:
+    name: geerlingguy.docker
+  vars:
+    docker_edition: "{{ bsd_docker_edition }}"
+    docker_package: "docker-{{ bsd_docker_edition }}"
+    docker_package_state: present
+    docker_install_compose: true

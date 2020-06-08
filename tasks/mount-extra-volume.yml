@@ -1,0 +1,20 @@
+---
+- name: Only mount the volume if we can find it at the defined path of {{ bsd_docker_volume_path }}.
+  shell: |
+    if test -L {{ bsd_docker_volume_path }}; then echo 0;else echo 1; fi
+  register: disk_result
+  ignore_errors: True
+  changed_when: false
+
+- name: Mount /var/lib/docker at {{ bsd_docker_volume_path }}.
+  mount:
+    path: /var/lib/docker
+    src: "{{ bsd_docker_volume_path }}"
+    fstype: ext4
+    opts: defaults,nofail,discard
+    state: present
+  notify: reboot
+  when: disk_result.stdout_lines[0] == "0"
+
+- name: Flush handlers.
+  meta: flush_handlers

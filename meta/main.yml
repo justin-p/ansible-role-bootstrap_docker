@@ -1,0 +1,18 @@
+galaxy_info:
+  role_name: bootstrap_docker  
+  author: Justin Perdok
+  description: My docker bootstrap role
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - artful
+
+  galaxy_tags: []
+
+dependencies: []
+  
