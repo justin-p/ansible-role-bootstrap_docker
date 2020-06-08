@@ -7,4 +7,4 @@
   - import_tasks: harden-docker.yml
     tags:
     - molecule-notest
-  become: true 
+  become: true
