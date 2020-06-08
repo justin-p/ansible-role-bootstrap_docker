@@ -28,7 +28,7 @@
    - "-w /etc/docker/daemon.json -k docker"
    - "-w /usr/bin/docker-containerd -k docker"
    - "-w /usr/bin/docker-runc -k docker"
- 
+
 - name: Ensure Docker Daemon file is uploaded.
   template:
     src: "{{ bsd_docker_deamon_template }}"

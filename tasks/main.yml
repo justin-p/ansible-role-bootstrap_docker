@@ -1,6 +1,6 @@
 ---
 - import_tasks: ansible-galaxy-requirements.yml
-- block: 
+- block:
   - import_tasks: users.yml
   - import_tasks: mount-extra-volume.yml
   - import_tasks: install-docker.yml
