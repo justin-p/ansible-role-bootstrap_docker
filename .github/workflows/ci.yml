@@ -1,16 +1,36 @@
 ---
 name: CI
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
+    paths-ignore: 
+      - '.github/**'
+      - 'meta/**'
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - '.editorconfig'
+      - '.ansible-lint'
+      - '.yamllint'
   pull_request:
     branches: [ master ]
+    paths-ignore: 
+      - '.github/**'
+      - 'meta/**'
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - '.editorconfig'
+      - '.ansible-lint'
+      - '.yamllint'    
   schedule:
     - cron: "0 16 * * *"
+  release:
 
 jobs:
   test:
-    name: Molecule
+    name: Run molecule tests.
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -31,8 +51,20 @@ jobs:
         run: pip3 install molecule docker yamllint ansible-lint
 
       - name: Run Molecule tests.
-        run: molecule test
+        run: molecule tests
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO: ${{ matrix.distro }}
+  
+  release:
+    name: Push release to Ansible Galaxy.
+    if: github.event_name == 'release'
+    needs:
+      - test
+    runs-on: ubuntu-latest
+    steps:
+      - name: galaxy
+        uses: robertdebock/galaxy-action@1.0.3
+        with:
+          galaxy_api_key: ${{ secrets.galaxy_api_key }}
