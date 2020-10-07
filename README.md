@@ -1,7 +1,9 @@
 # ansible-role-bootstrap-docker
 
-![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-bootstrap-docker/CI?label=Github%20Actions&logo=github&style=flat-square)
-![Travis](https://img.shields.io/travis/justin-p/ansible-role-bootstrap-docker?label=Travis&logo=travis&style=flat-square)
+[![Ansible Role Name](https://img.shields.io/ansible/role/51176?label=Role%20Name&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/bootstrap_docker)
+[![Ansible Quality Score](https://img.shields.io/ansible/quality/51176?label=Ansible%20Quality%20Score&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/bootstrap_docker)
+[![Ansible Role Downloads](https://img.shields.io/ansible/role/d/51176?label=Ansible%20Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/bootstrap_docker)
+[![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-bootstrap-docker/CI?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-bootstrap-docker/actions)
 
 A Ansible role I build for quickly configuring and hardening docker on a new VM.
 
