@@ -1,13 +1,12 @@
 ---
+---
 name: CI
-'on':
-  pull_request:
+on:
   push:
-    branches:
-      - master
-  schedule:
-    - cron: '0 16 * * *'
-      
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
   test:
     name: Molecule
@@ -15,8 +14,8 @@ jobs:
     strategy:
       matrix:
         distro:
-          - ubuntu1804
           - ubuntu2004
+          - ubuntu1804
 
     steps:
       - name: Check out the codebase.
