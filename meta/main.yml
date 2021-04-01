@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: bootstrap_docker
+  namespace: justin_p  
   author: Justin Perdok
   description: My docker bootstrap role
   license: MIT
