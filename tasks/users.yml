@@ -10,8 +10,7 @@
    name: "{{ bsd_docker_username }}"
    password: "{{ bsd_docker_password | password_hash('sha512', bsd_docker_password_salt) }}"
    uid: "{{ bsd_docker_uid }}"
-   group: "{{ bsd_docker_username }}"
-   append: yes
+   groups: "{{ bsd_docker_username }}"
    state: present
    shell: /bin/bash
    system: no
