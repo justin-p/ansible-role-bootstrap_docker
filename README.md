@@ -24,6 +24,7 @@ I'd recommend not using this copy directly in target containers (i.e. traefik), 
 | bsd_docker_volume_path           | The path to a newly formated disk to mount `/var/lib/docker` on. Note, if a invalid path is supplied no mount action takes place. | /dev/disk/by-id/scsi-0DO_Volume_volume                 |
 | bsd_docker_remap_socket_template | The template file for the docker remap socket.                                                                                    | {{ role_path }}/templates/dockerremapsocket.service.j2 |
 | bsd_docker_deamon_template       | The template for the docker daemon.                                                                                               | {{ role_path }}/templates/daemon.json.j2               |
+| bsd_docker_iptables_template       | The template for the iptables persistant file.                                                                                               | {{ role_path }}/templates/rules.v4.j2               |
 | bsd_docker_edition               | The edition of docker to install.                                                                                                 | ce                                                     |
 
 ## Example Playbook
