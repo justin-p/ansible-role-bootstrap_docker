@@ -1,10 +1,14 @@
 ---
 - ansible.builtin.import_tasks: ansible-galaxy-requirements.yml
 - block:
-  - ansible.builtin.import_tasks: users.yml
-  - ansible.builtin.import_tasks: mount-extra-volume.yml
-  - ansible.builtin.import_tasks: install-docker.yml
-  - ansible.builtin.import_tasks: harden-docker.yml
+  - name: Configure docker user
+    ansible.builtin.import_tasks: users.yml
+  - name: Mount docker disk if needed
+    ansible.builtin.import_tasks: mount-extra-volume.yml
+  - name: Install docker with geerlingguy.docker
+    ansible.builtin.import_tasks: install-docker.yml
+  - name: Harden docker
+    ansible.builtin.import_tasks: harden-docker.yml
     tags:
     - molecule-notest
   become: true
