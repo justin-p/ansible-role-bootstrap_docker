@@ -1,5 +1,6 @@
 ---
-- ansible.builtin.import_tasks: ansible-galaxy-requirements.yml
+- name: Install local requirements
+  ansible.builtin.import_tasks: ansible-galaxy-requirements.yml
 - block:
   - name: Configure docker user
     ansible.builtin.import_tasks: users.yml
