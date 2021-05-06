@@ -1,10 +1,10 @@
 ---
-- import_tasks: ansible-galaxy-requirements.yml
+- ansible.builtin.import_tasks: ansible-galaxy-requirements.yml
 - block:
-  - import_tasks: users.yml
-  - import_tasks: mount-extra-volume.yml
-  - import_tasks: install-docker.yml
-  - import_tasks: harden-docker.yml
+  - ansible.builtin.import_tasks: users.yml
+  - ansible.builtin.import_tasks: mount-extra-volume.yml
+  - ansible.builtin.import_tasks: install-docker.yml
+  - ansible.builtin.import_tasks: harden-docker.yml
     tags:
     - molecule-notest
   become: true

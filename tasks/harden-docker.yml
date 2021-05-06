@@ -1,8 +1,11 @@
 ---
+- name: Ensure iptables-persistent is installed.
+  ansible.builtin.apt:
+    name: iptables-persistent 
+
 - name: Ensure audit daemon is installed.
-  package:
+  ansible.builtin.apt:
     name: auditd
-    state: present
   notify: auditd restart
 
 - name: Enable service auditd and ensure it is not masked.
@@ -12,7 +15,7 @@
     masked: no
 
 - name: Ensure auditing is configured for Docker daemon, files and directories.
-  lineinfile:
+  ansible.builtin.lineinfile:
     state: present
     create: yes
     dest: "/etc/audit/rules.d/docker.rules"
@@ -30,38 +33,64 @@
    - "-w /usr/bin/docker-runc -k docker"
 
 - name: Ensure Docker Daemon file is uploaded.
-  template:
+  ansible.builtin.template:
     src: "{{ bsd_docker_deamon_template }}"
     dest: "/etc/docker/daemon.json"
+    owner: root
+    group: root
+    mode: '0644'
   notify: docker restart
 
+- name: Remove /etc/iptables/rules.v6
+  ansible.builtin.file:
+    path: /etc/iptables/rules.v6
+    state: absent
+
+- name: Copy iptables docker rules
+  ansible.builtin.template:
+    src: "{{ bsd_docker_iptables_template }}"
+    dest: /etc/iptables/rules.v4
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Update default forward policy
+  ansible.builtin.lineinfile:
+    path: /etc/default/ufw
+    regexp: '^DEFAULT_FORWARD_POLICY='
+    line: 'DEFAULT_FORWARD_POLICY="ACCEPT"'
+  notify: reload ufw
+
+- name: Flush handlers.
+  meta: flush_handlers
+
 - name: Ensure socat is installed
-  package:
+  ansible.builtin.apt:
     name: socat
-    state: present
 
 - name: Copy dockerremapsocket service template to host.
-  template:
+  ansible.builtin.template:
     src: "{{ bsd_docker_remap_socket_template }}"
     dest: /etc/systemd/system/dockerremapsocket.service
     owner: root
     group: root
+    mode: '0644'    
 
 - name: Enable dockerremapsocket.
-  become: yes
-  service:
+  ansible.builtin.service:
     name: dockerremapsocket
     enabled: yes
+  become: yes
 
 - name: Flush handlers.
   meta: flush_handlers
 
 - name: Ensure docker is running.
-  service:
+  ansible.builtin.service:
     name: docker
     state: started
 
 - name: Ensure dockerremapsocket is running.
-  service:
+  ansible.builtin.service:
     name: dockerremapsocket
     state: started
