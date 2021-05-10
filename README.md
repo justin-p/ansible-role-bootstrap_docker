@@ -5,7 +5,7 @@
 [![Ansible Role Downloads](https://img.shields.io/ansible/role/d/51176?label=Ansible%20Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/bootstrap_docker)
 [![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-bootstrap-docker/CI?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-bootstrap-docker/actions)
 
-A Ansible role I build for quickly configuring and hardening docker on a new VM.
+A Ansible role I build for quickly configuring and hardening docker on a new VM to my personal standards.
 
 If you where to use this role you probably don't want to use the default password/salt values. Overwrite these in each project with unique values and store them securely with Ansible Vault.   
 After enabeling `userns-remap` you are no longer able to mount the docker sock in side of a container. To solve this we create a copy of the socket with socat under the following path `/var/run/docker-userns.sock`. This copy gives the root account and dockerremap group read and write on the copied docker socket.  
