@@ -19,3 +19,8 @@
   service:
     name: docker
     state: restarted
+
+- name: reload ufw
+  become: yes
+  community.general.ufw:
+    state: reloaded    
