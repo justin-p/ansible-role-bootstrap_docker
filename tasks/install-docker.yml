@@ -1,9 +1,22 @@
 ---
-- name: Ensure docker is installed.
+- name: Ensure robertdebock.bootstrap is ran.
   ansible.builtin.include_role:
-    name: geerlingguy.docker
-  vars:
-    docker_edition: "{{ bsd_docker_edition }}"
-    docker_package: "docker-{{ bsd_docker_edition }}"
-    docker_package_state: present
-    docker_install_compose: true
+    name: robertdebock.bootstrap
+- name: Ensure robertdebock.bootstrap is ran.
+  ansible.builtin.include_role:
+    name: robertdebock.epel
+- name: Ensure robertdebock.buildtools is ran.
+  ansible.builtin.include_role:
+    name: robertdebock.buildtools
+- name: Ensure robertdebock.python_pip is ran.
+  ansible.builtin.include_role:
+    name: robertdebock.python_pip
+- name: Ensure robertdebock.core_dependencies is ran.
+  ansible.builtin.include_role:
+    name: robertdebock.core_dependencies
+- name: Install docker_ce
+  ansible.builtin.include_role:
+    name: robertdebock.docker_ce
+- name: Install docker_compose
+  ansible.builtin.include_role:
+    name: robertdebock.docker_compose
