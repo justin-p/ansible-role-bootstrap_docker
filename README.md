@@ -7,7 +7,7 @@
 
 A Ansible role I build for quickly configuring docker and apply hardening (to my personal standards). 
 
-I **do not recommend** you use this on a existing VM/Infrastructure.
+**I do not recommend** you use this on a existing infrastructure.
 
 **Note:** If you where to use this role you probably don't want to use the default password/salt values. Overwrite these in each project with unique values and store them securely with Ansible Vault.
 
