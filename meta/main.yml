@@ -17,7 +17,6 @@ galaxy_info:
 
 dependencies: 
   - role: robertdebock.bootstrap
-    version: 5.2.6
   - role: robertdebock.epel
     version: 3.1.2
   - role: robertdebock.buildtools
