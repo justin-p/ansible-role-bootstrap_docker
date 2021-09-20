@@ -1,6 +1,6 @@
 ---
 - name: Ensure docker is installed.
-  include_role:
+  ansible.builtin.include_role:
     name: geerlingguy.docker
   vars:
     docker_edition: "{{ bsd_docker_edition }}"

@@ -19,3 +19,15 @@
   service:
     name: docker
     state: restarted
+
+- name: netfilter persistent restart
+  become: yes
+  service:
+    name: netfilter-persistent
+    state: restarted
+
+- name: reload ufw
+  become: yes
+  community.general.ufw:
+    state: reloaded
+

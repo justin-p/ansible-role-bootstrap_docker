@@ -1,17 +1,16 @@
 ---
 - name: Ensure docker usergroup named {{ bsd_docker_username }} is created.
-  group:
+  ansible.builtin.group:
     name: "{{ bsd_docker_username }}"
     gid: "{{ bsd_docker_gid }}"
     state: present
 
 - name: Ensure a docker user named {{ bsd_docker_username }} is created.
-  user:
+  ansible.builtin.user:
    name: "{{ bsd_docker_username }}"
    password: "{{ bsd_docker_password | password_hash('sha512', bsd_docker_password_salt) }}"
    uid: "{{ bsd_docker_uid }}"
-   group: "{{ bsd_docker_username }}"
-   append: yes
+   groups: "{{ bsd_docker_username }}"
    state: present
    shell: /bin/bash
    system: no
@@ -21,7 +20,7 @@
    ssh_key_bits: 2048
 
 - name: Ensure our public key is added to the docker user.
-  authorized_key:
+  ansible.posix.authorized_key:
     user: "{{ bsd_docker_username }}"
     key: "{{ lookup('file', bsd_docker_public_key_path) }}"
     state: present
