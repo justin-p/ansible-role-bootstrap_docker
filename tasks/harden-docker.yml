@@ -82,7 +82,7 @@
     dest: /etc/systemd/system/dockerremapsocket.service
     owner: root
     group: root
-    mode: '0644'    
+    mode: '0644'
 
 - name: Enable dockerremapsocket.
   ansible.builtin.service:
