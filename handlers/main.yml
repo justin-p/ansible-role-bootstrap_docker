@@ -30,4 +30,3 @@
   become: yes
   community.general.ufw:
     state: reloaded
-
