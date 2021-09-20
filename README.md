@@ -5,7 +5,9 @@
 [![Ansible Role Downloads](https://img.shields.io/ansible/role/d/51176?label=Ansible%20Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/justin_p/bootstrap_docker)
 [![Github Actions](https://img.shields.io/github/workflow/status/justin-p/ansible-role-bootstrap-docker/CI?label=Github%20Actions&logo=github&style=flat-square)](https://github.com/justin-p/ansible-role-bootstrap-docker/actions)
 
-A Ansible role I build for quickly configuring docker and apply hardening (to my personal standards). I **do not recommend** you use this on a existing VM/Infrastructure.
+A Ansible role I build for quickly configuring docker and apply hardening (to my personal standards). 
+
+I **do not recommend** you use this on a existing VM/Infrastructure.
 
 **Note:** If you where to use this role you probably don't want to use the default password/salt values. Overwrite these in each project with unique values and store them securely with Ansible Vault.
 
