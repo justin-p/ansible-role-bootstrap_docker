@@ -1,5 +1,0 @@
----
-- name: Install needed roles locally from Ansible Galaxy.
-  ansible.builtin.command: ansible-galaxy install -r {{ role_path }}/files/requirements.yml
-  delegate_to: localhost
-  changed_when: False

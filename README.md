@@ -39,6 +39,22 @@ I'd recommend not using this copy directly in target containers (i.e. traefik), 
 | bsd_docker_edition               | The edition of docker to install.                                                                                                 | ce                                                     |
 | bsd_docker_interface_out         | The interface to allow outbound routes to coming from the docker0 interface.                                                      | {{ ansible_default_ipv4.interface }}                   |
 
+## Dependencies
+
+[robertdebock.bootstrap](https://github.com/robertdebock/ansible-role-bootstrap)
+
+[robertdebock.epel](https://github.com/robertdebock/ansible-role-epel)
+
+[robertdebock.buildtools](https://github.com/robertdebock/ansible-role-buildtools)
+
+[robertdebock.python_pip](https://github.com/robertdebock/ansible-role-python_pip)
+
+[robertdebock.core_dependencies](https://github.com/robertdebock/ansible-role-core_dependencies)
+
+[robertdebock.docker_ce](https://github.com/robertdebock/ansible-role-docker_ce)
+
+[robertdebock.docker_compose](https://github.com/robertdebock/ansible-role-docker_compose)
+
 ## Example Playbook
 
 ```yaml

@@ -15,4 +15,17 @@ galaxy_info:
 
   galaxy_tags: []
 
-dependencies: []
+dependencies: 
+  - role: robertdebock.bootstrap
+  - role: robertdebock.epel
+    version: 3.1.2
+  - role: robertdebock.buildtools
+    version: 3.1.2
+  - role: robertdebock.python_pip
+    version: 4.2.2
+  - role: robertdebock.core_dependencies
+    version: 2.1.1
+  - role: robertdebock.docker_ce
+    version: 3.2.1
+  - role: robertdebock.docker_compose
+    version: 2.1.0
