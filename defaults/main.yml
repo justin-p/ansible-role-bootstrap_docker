@@ -12,3 +12,4 @@ bsd_docker_remap_socket_template: "{{ role_path }}/templates/dockerremapsocket.s
 bsd_docker_deamon_template: "{{ role_path }}/templates/daemon.json.j2"
 bsd_docker_iptables_template: "{{ role_path }}/templates/rules.v4.j2"
 bsd_docker_edition: "ce"
+bsd_docker_interface_out: "{{ ansible_default_ipv4.interface }}"

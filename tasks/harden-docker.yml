@@ -31,6 +31,11 @@
    - "-w /etc/docker/daemon.json -k docker"
    - "-w /usr/bin/docker-containerd -k docker"
    - "-w /usr/bin/docker-runc -k docker"
+   - "-w /run/containerd -k docker"   
+   - "-w /etc/containerd/config.toml -k docker"
+   - "-w /usr/bin/containerd-shim -k docker"
+   - "-w /usr/bin/containerd-shim-runc-v1 -k docker"
+   - "-w /usr/bin/containerd-shim-runc-v2 -k docker"   
 
 - name: Ensure Docker Daemon file is uploaded.
   ansible.builtin.template:
@@ -46,19 +51,22 @@
     path: /etc/iptables/rules.v6
     state: absent
 
-- name: Copy iptables docker rules
+- name: Copy iptables docker nat rules
   ansible.builtin.template:
     src: "{{ bsd_docker_iptables_template }}"
     dest: /etc/iptables/rules.v4
     owner: root
     group: root
     mode: '0644'
+  notify: netfilter persistent restart
 
-- name: Update default forward policy
-  ansible.builtin.lineinfile:
-    path: /etc/default/ufw
-    regexp: '^DEFAULT_FORWARD_POLICY='
-    line: 'DEFAULT_FORWARD_POLICY="ACCEPT"'
+- name: Add UFW route to allow docker0 to go out on {{ bsd_docker_interface_out }}
+  community.general.ufw:
+    rule: allow
+    route: yes
+    interface_in: docker0
+    interface_out: "{{ bsd_docker_interface_out }}"
+    dest: any
   notify: reload ufw
 
 - name: Flush handlers.
