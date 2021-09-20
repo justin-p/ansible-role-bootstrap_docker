@@ -1,10 +1,10 @@
 ---
 roles:
-- src: https://github.com/geerlingguy/ansible-role-docker
-  name: geerlingguy.docker
-  version: 2.7.0
-- src: https://github.com/geerlingguy/ansible-role-pip
-  name: geerlingguy.pip
-  version: 2.0.0
+- src: https://github.com/robertdebock/ansible-role-docker_ce
+  name: robertdebock.docker_ce
+  version: 3.2.1
+- src: https://github.com/robertdebock/ansible-role-docker_compose
+  name: robertdebock.docker_compose
+  version: 2.1.0  
 collections:
   - name: ansible.posix
