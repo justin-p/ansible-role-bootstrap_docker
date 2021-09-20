@@ -1,9 +1,15 @@
 ---
-- name: Ensure docker is installed.
-  ansible.builtin.include_role:
-    name: geerlingguy.docker
-  vars:
-    docker_edition: "{{ bsd_docker_edition }}"
-    docker_package: "docker-{{ bsd_docker_edition }}"
-    docker_package_state: present
-    docker_install_compose: true
+- include_role:
+    name: robertdebock.bootstrap
+- include_role:
+    name: robertdebock.epel
+- include_role:
+    name: robertdebock.buildtools
+- include_role:
+    name: robertdebock.python_pip
+- include_role:
+    name: robertdebock.core_dependencies
+- include_role:
+    name: robertdebock.docker_ce
+- include_role:
+    name: robertdebock.docker_compose
