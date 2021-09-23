@@ -1,7 +1,7 @@
 ---
 # defaults file for bootstrap-docker/
 bsd_sshkey_folder: ~/.ssh
-bsd_docker_username: docker
+bsd_docker_username: docker_user
 bsd_docker_gid: "1337"
 bsd_docker_uid: "1337"
 bsd_docker_password: 123c2b9e024723391cf60279c5eb84e4!
