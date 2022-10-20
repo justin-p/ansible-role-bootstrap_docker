@@ -17,4 +17,4 @@
   when: disk_result.stdout_lines[0] == "0"
 
 - name: Flush handlers.
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
