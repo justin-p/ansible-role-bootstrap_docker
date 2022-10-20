@@ -2,27 +2,27 @@
 # handlers file for bootstrap-docker/
 - name: reboot
   become: yes
-  reboot:
+  ansible.builtin.reboot:
 
 - name: auditd restart
   become: yes
-  service:
+  ansible.builtin.service:
     name: auditd
     state: restarted
 
 - name: load audit rules
   become: yes
-  command: "/sbin/augenrules --load"
+  ansible.builtin.command: "/sbin/augenrules --load"
 
 - name: docker restart
   become: yes
-  service:
+  ansible.builtin.service:
     name: docker
     state: restarted
 
 - name: netfilter persistent restart
   become: yes
-  service:
+  ansible.builtin.service:
     name: netfilter-persistent
     state: restarted
 

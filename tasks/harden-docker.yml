@@ -9,7 +9,7 @@
   notify: auditd restart
 
 - name: Enable service auditd and ensure it is not masked.
-  systemd:
+  ansible.builtin.systemd:
     name: auditd
     enabled: yes
     masked: no
@@ -70,7 +70,7 @@
   notify: reload ufw
 
 - name: Flush handlers.
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Ensure socat is installed
   ansible.builtin.apt:
@@ -91,7 +91,7 @@
   become: yes
 
 - name: Flush handlers.
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Ensure docker is running.
   ansible.builtin.service:
